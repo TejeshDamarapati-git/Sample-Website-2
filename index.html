@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 
 <!-- Primary SEO Meta Tags -->
 <title id="pageTitle">GreenScape Pro — Premium Landscaping & Lawn Care Services</title>
@@ -65,8 +65,9 @@ body{
   background:#fafaf5;
   line-height:1.6;
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;height:auto}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 
@@ -86,9 +87,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 
 /* ================= TYPOGRAPHY ================= */
 h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2;color:var(--green-900)}
-h1{font-size:clamp(2.5rem,5vw,4.5rem)}
-h2{font-size:clamp(2rem,4vw,3.2rem);margin-bottom:1rem}
-h3{font-size:1.5rem}
+h1{font-size:clamp(2.2rem,5vw,4.5rem)}
+h2{font-size:clamp(1.8rem,4vw,3.2rem);margin-bottom:1rem}
+h3{font-size:clamp(1.2rem,2vw,1.5rem)}
 .eyebrow{
   display:inline-block;
   color:var(--green-500);
@@ -157,9 +158,19 @@ h3{font-size:1.5rem}
 .nav-cta:hover{background:#fff;transform:translateY(-2px)}
 .nav-cta::after{display:none}
 
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.hamburger{display:none;flex-direction:column;gap:6px;cursor:pointer;z-index:1002;padding:5px}
 .hamburger span{width:28px;height:3px;background:#fff;border-radius:2px;transition:var(--transition)}
 .nav.scrolled .hamburger span{background:var(--green-900)}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(6px, 6px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(6px, -6px)}
+
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);
+  z-index:1001;opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+.nav-overlay.open{opacity:1;pointer-events:auto}
 
 /* ================= PAGES ================= */
 .page{display:none;animation:fadeIn .6s ease}
@@ -170,7 +181,7 @@ h3{font-size:1.5rem}
 .hero{
   min-height:100vh;
   background:linear-gradient(rgba(26,58,26,.55),rgba(26,58,26,.7)),
-    url('https://images.unsplash.com/photo-1585320806297-9790181e4138?w=1920') center/cover;
+    url('https://images.unsplash.com/photo-1585320806297-9790181e4138?w=1920') center/cover no-repeat;
   display:flex;align-items:center;
   position:relative;
   color:#fff;
@@ -179,13 +190,14 @@ h3{font-size:1.5rem}
 .hero-content{max-width:780px;z-index:2}
 .hero h1{color:#fff;margin-bottom:1.5rem}
 .hero h1 span{color:var(--gold);font-style:italic}
-.hero p{font-size:1.2rem;margin-bottom:2.5rem;max-width:600px;opacity:.95}
+.hero p{font-size:clamp(1rem,2vw,1.2rem);margin-bottom:2.5rem;max-width:600px;opacity:.95}
 .btn-group{display:flex;gap:1rem;flex-wrap:wrap}
 .btn{
   padding:1rem 2.2rem;border-radius:50px;
   font-weight:600;font-size:1rem;
   transition:var(--transition);
-  display:inline-flex;align-items:center;gap:.5rem;
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  touch-action:manipulation;
 }
 .btn-primary{background:var(--gold);color:var(--green-900)}
 .btn-primary:hover{background:#fff;transform:translateY(-3px);box-shadow:var(--shadow-lg)}
@@ -200,8 +212,8 @@ h3{font-size:1.5rem}
   padding:2rem 5%;
 }
 .stat{text-align:center;padding:0 1rem}
-.stat-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--green-700)}
-.stat-label{font-size:.85rem;color:#666;letter-spacing:1px;text-transform:uppercase;margin-top:.3rem}
+.stat-num{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;color:var(--green-700)}
+.stat-label{font-size:.8rem;color:#666;letter-spacing:1px;text-transform:uppercase;margin-top:.3rem}
 
 /* ================= SECTIONS ================= */
 section{padding:6rem 5%}
@@ -211,18 +223,17 @@ section{padding:6rem 5%}
 /* ================= PAGE HERO (Interior) ================= */
 .page-hero{
   min-height:60vh;
-  background:linear-gradient(rgba(26,58,26,.65),rgba(26,58,26,.75)),
-    url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920') center/cover;
+  background:linear-gradient(rgba(26,58,26,.65),rgba(26,58,26,.75)) center/cover no-repeat;
   display:flex;align-items:center;justify-content:center;
   color:#fff;text-align:center;
-  padding:0 5%;
+  padding:8rem 5% 4rem;
   position:relative;
 }
 .page-hero h1{color:#fff;margin-bottom:1rem}
-.page-hero p{font-size:1.2rem;max-width:700px;opacity:.95}
+.page-hero p{font-size:clamp(1rem,2vw,1.2rem);max-width:700px;opacity:.95;margin:0 auto}
 .breadcrumb{
   margin-top:1.5rem;
-  font-size:.9rem;
+  font-size:.85rem;
   letter-spacing:1px;
   text-transform:uppercase;
   opacity:.8;
@@ -244,7 +255,7 @@ section{padding:6rem 5%}
 .about-img img{height:550px;object-fit:cover;width:100%;transition:transform .8s ease}
 .about-img:hover img{transform:scale(1.05)}
 .about-badge{
-  position:absolute;bottom:30px;left:-30px;
+  position:absolute;bottom:30px;left:20px;
   background:var(--gold);color:var(--green-900);
   padding:1.5rem 2rem;border-radius:var(--radius);
   box-shadow:var(--shadow);
@@ -268,7 +279,7 @@ section{padding:6rem 5%}
 
 /* ================= SERVICES ================= */
 .services-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:2rem;max-width:1300px;margin:0 auto;
 }
 .service-card{
@@ -276,9 +287,10 @@ section{padding:6rem 5%}
   overflow:hidden;box-shadow:var(--shadow);
   transition:var(--transition);
   position:relative;
+  display:flex;flex-direction:column;
 }
 .service-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg)}
-.service-img{height:240px;overflow:hidden;position:relative}
+.service-img{height:240px;overflow:hidden;position:relative;flex-shrink:0}
 .service-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .service-card:hover .service-img img{transform:scale(1.1)}
 .service-img::after{
@@ -293,9 +305,9 @@ section{padding:6rem 5%}
   font-size:1.6rem;z-index:2;
   box-shadow:var(--shadow);
 }
-.service-body{padding:2rem}
+.service-body{padding:2rem;flex-grow:1;display:flex;flex-direction:column}
 .service-body h3{margin-bottom:.8rem}
-.service-body p{color:#666;margin-bottom:1.2rem;font-size:.95rem}
+.service-body p{color:#666;margin-bottom:1.2rem;font-size:.95rem;flex-grow:1}
 .service-list{list-style:none;margin-bottom:1.5rem}
 .service-list li{
   padding:.4rem 0;padding-left:1.5rem;
@@ -315,7 +327,7 @@ section{padding:6rem 5%}
 /* ================= WHY CHOOSE US ================= */
 .why-section{background:linear-gradient(135deg,#f5f7f0,#fafaf5)}
 .why-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:2rem;max-width:1300px;margin:0 auto;
 }
 .why-card{
@@ -389,7 +401,7 @@ section{padding:6rem 5%}
   width:55px;height:55px;border-radius:50%;
   background:linear-gradient(135deg,var(--gold),#e0c080);
   display:flex;align-items:center;justify-content:center;
-  font-weight:700;color:var(--green-900);font-size:1.2rem;
+  font-weight:700;color:var(--green-900);font-size:1.2rem;flex-shrink:0;
 }
 .author-info strong{display:block;color:#fff}
 .author-info span{font-size:.85rem;opacity:.7}
@@ -429,6 +441,7 @@ section{padding:6rem 5%}
   background:rgba(255,255,255,.15);
   display:flex;align-items:center;justify-content:center;
   transition:var(--transition);
+  font-weight:700;
 }
 .social-links a:hover{background:var(--gold);color:var(--green-900);transform:translateY(-3px)}
 
@@ -444,12 +457,13 @@ section{padding:6rem 5%}
   font-weight:500;font-size:.9rem;color:var(--green-900);
 }
 .form-group input,.form-group select,.form-group textarea{
-  width:100%;padding:.9rem 1rem;
+  width:100%;padding:1rem;
   border:1.5px solid #e0e0d8;
   border-radius:10px;
-  font-family:inherit;font-size:.95rem;
+  font-family:inherit;font-size:16px; /* Prevents iOS zoom on focus */
   transition:var(--transition);
   background:#fafaf5;
+  -webkit-appearance:none;
 }
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
   outline:none;border-color:var(--green-500);
@@ -463,6 +477,7 @@ section{padding:6rem 5%}
   font-weight:600;font-size:1rem;
   transition:var(--transition);
   letter-spacing:.5px;
+  touch-action:manipulation;
 }
 .submit-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
 .form-message{
@@ -475,7 +490,7 @@ section{padding:6rem 5%}
 /* ================= CTA BANNER ================= */
 .cta-banner{
   background:linear-gradient(rgba(26,58,26,.85),rgba(26,58,26,.9)),
-    url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=1920') center/cover fixed;
+    url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=1920') center/cover no-repeat;
   color:#fff;text-align:center;padding:6rem 5%;
 }
 .cta-banner h2{color:#fff;margin-bottom:1rem}
@@ -509,29 +524,87 @@ footer{
   font-size:.9rem;opacity:.7;
 }
 
-/* ================= RESPONSIVE ================= */
-@media(max-width:968px){
-  .about-grid,.contact-grid{grid-template-columns:1fr;gap:3rem}
-  .about-badge{left:20px}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
-  .hero-stats{grid-template-columns:repeat(2,1fr);gap:1.5rem}
+/* ================= COMPREHENSIVE RESPONSIVE ================= */
+
+/* Tablet & Small Desktop */
+@media (max-width: 1024px) {
+  .about-grid { gap: 3rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
 }
-@media(max-width:768px){
-  .hamburger{display:flex}
-  .nav-links{
-    position:fixed;top:0;right:-100%;
-    width:80%;max-width:350px;height:100vh;
-    background:#fff;flex-direction:column;
-    justify-content:center;gap:2rem;
-    transition:right .4s ease;
-    box-shadow:-10px 0 40px rgba(0,0,0,.1);
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+  /* Navigation */
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 320px;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: -10px 0 40px rgba(0,0,0,0.15);
+    z-index: 1002;
   }
-  .nav-links.open{right:0}
-  .nav-links a{color:var(--green-900)!important;font-size:1.2rem}
-  .form-row{grid-template-columns:1fr}
-  .about-features{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  section{padding:4rem 5%}
+  .nav-links.open { right: 0; }
+  .nav-links a {
+    color: var(--green-900) !important;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  /* Hero Section */
+  .hero { min-height: auto; padding: 8rem 5% 2rem; }
+  .hero-stats {
+    position: relative;
+    margin-top: 3rem;
+    grid-template-columns: 1fr 1fr;
+    border-radius: var(--radius);
+  }
+  
+  /* Grids & Layouts */
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-img img { height: 350px; }
+  .about-badge { left: 15px; bottom: 15px; padding: 1rem 1.5rem; }
+  .about-badge strong { font-size: 2rem; }
+  .about-features { grid-template-columns: 1fr; }
+  
+  .services-grid, .why-grid, .testimonials-grid, .process-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .footer-logo { justify-content: center; }
+  
+  /* Forms */
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  
+  /* Sections */
+  section { padding: 4rem 5%; }
+  .section-head { margin-bottom: 2.5rem; }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+  .hero-stats { grid-template-columns: 1fr; gap: 1.5rem; }
+  .btn { width: 100%; }
+  .btn-group { flex-direction: column; width: 100%; }
+  .service-img { height: 200px; }
+  .contact-form { padding: 2rem 1.5rem; }
+  .contact-info { padding: 2rem 1.5rem; }
+}
+
+/* Desktop-only parallax (prevents iOS Safari bugs) */
+@media (min-width: 769px) {
+  .cta-banner { background-attachment: fixed; }
 }
 
 /* ================= SCROLL ANIMATIONS ================= */
@@ -559,10 +632,10 @@ footer{
     <span></span><span></span><span></span>
   </div>
 </nav>
+<div class="nav-overlay" id="navOverlay"></div>
 
 <!-- ============ HOME PAGE ============ -->
 <main id="page-home" class="page active">
-
   <section class="hero">
     <div class="hero-content">
       <span class="eyebrow" style="color:var(--gold)">Award-Winning Landscaping</span>
@@ -601,8 +674,7 @@ footer{
       </article>
       <article class="service-card">
         <div class="service-img">
-          <img src="https://plus.unsplash.com/premium_photo-1682098326871-95eac6cf4f25?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-          alt="Lawn mowing service" loading="lazy" />
+          <img src="https://plus.unsplash.com/premium_photo-1682098326871-95eac6cf4f25?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Lawn mowing service" loading="lazy" />
           <div class="service-icon">🌱</div>
         </div>
         <div class="service-body">
@@ -640,7 +712,7 @@ footer{
     <div class="testimonials-grid">
       <div class="testimonial">
         <div class="stars">★★★★★</div>
-        <p>"GreenScape Pro transformed our backyard from an overgrown mess into a stunning oasis. The attention to detail was extraordinary — every plant, every stone, perfectly placed."</p>
+        <p>"GreenScape Pro transformed our backyard from an overgrown mess into a stunning oasis. The attention to detail was extraordinary."</p>
         <div class="testimonial-author">
           <div class="author-avatar">SM</div>
           <div class="author-info"><strong>Sarah Mitchell</strong><span>Portland, OR</span></div>
@@ -648,7 +720,7 @@ footer{
       </div>
       <div class="testimonial">
         <div class="stars">★★★★★</div>
-        <p>"Professional, creative, and reliable. Our new patio and garden have become the heart of our home. Neighbors constantly stop to admire the work."</p>
+        <p>"Professional, creative, and reliable. Our new patio and garden have become the heart of our home."</p>
         <div class="testimonial-author">
           <div class="author-avatar">JR</div>
           <div class="author-info"><strong>James Rodriguez</strong><span>Lake Oswego, OR</span></div>
@@ -656,7 +728,7 @@ footer{
       </div>
       <div class="testimonial">
         <div class="stars">★★★★★</div>
-        <p>"From the initial design consultation to final walkthrough, the team exceeded every expectation. Worth every penny — our property value has noticeably increased."</p>
+        <p>"From the initial design consultation to final walkthrough, the team exceeded every expectation."</p>
         <div class="testimonial-author">
           <div class="author-avatar">EC</div>
           <div class="author-info"><strong>Emily Chen</strong><span>Beaverton, OR</span></div>
@@ -869,60 +941,6 @@ footer{
           <a href="#contact" data-page="contact" class="service-link">Install Irrigation →</a>
         </div>
       </article>
-
-      <article class="service-card">
-        <div class="service-img">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600" alt="Tree trimming service" loading="lazy" />
-          <div class="service-icon">🌲</div>
-        </div>
-        <div class="service-body">
-          <h3>Tree & Shrub Care</h3>
-          <p>ISA-certified arborists providing expert pruning, health care, and safe removal services.</p>
-          <ul class="service-list">
-            <li>Pruning & shaping</li>
-            <li>Disease diagnosis & treatment</li>
-            <li>Storm damage response</li>
-            <li>Safe tree removal</li>
-          </ul>
-          <a href="#contact" data-page="contact" class="service-link">Care for Trees →</a>
-        </div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-img">
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600" alt="Water feature fountain" loading="lazy" />
-          <div class="service-icon">⛲</div>
-        </div>
-        <div class="service-body">
-          <h3>Water Features</h3>
-          <p>Custom ponds, fountains, waterfalls, and streams that add tranquility to any landscape.</p>
-          <ul class="service-list">
-            <li>Koi ponds & water gardens</li>
-            <li>Waterfalls & stream features</li>
-            <li>Fountains & bubbling rocks</li>
-            <li>Maintenance & winterizing</li>
-          </ul>
-          <a href="#contact" data-page="contact" class="service-link">Add Water Feature →</a>
-        </div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-img">
-          <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600" alt="Snow removal service" loading="lazy" />
-          <div class="service-icon">❄️</div>
-        </div>
-        <div class="service-body">
-          <h3>Seasonal Services</h3>
-          <p>Year-round property care including snow removal, leaf cleanup, and holiday lighting.</p>
-          <ul class="service-list">
-            <li>Snow & ice management</li>
-            <li>Fall leaf removal</li>
-            <li>Spring cleanup & mulching</li>
-            <li>Holiday light installation</li>
-          </ul>
-          <a href="#contact" data-page="contact" class="service-link">Book Seasonal →</a>
-        </div>
-      </article>
     </div>
   </section>
 
@@ -1026,39 +1044,6 @@ footer{
         <div class="process-num">5</div>
         <h3>Care</h3>
         <p>Enjoy your new landscape with our ongoing maintenance plans and lifetime warranty support.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="testimonials reveal">
-    <div class="section-head">
-      <span class="eyebrow">Real Client Experiences</span>
-      <h2>Don't Just Take Our Word for It</h2>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial">
-        <div class="stars">★★★★★</div>
-        <p>"We interviewed five companies before choosing GreenScape Pro. Their design vision, professionalism, and follow-through were unmatched. The final result exceeded our dreams."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">MT</div>
-          <div class="author-info"><strong>Michael Thompson</strong><span>West Linn, OR</span></div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <div class="stars">★★★★★</div>
-        <p>"The 5-year warranty gave us confidence, but the quality of work made it unnecessary. Three years later, our landscape looks better than the day it was installed."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">LP</div>
-          <div class="author-info"><strong>Linda Patel</strong><span>Tigard, OR</span></div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <div class="stars">★★★★★</div>
-        <p>"Transparent pricing from day one. No surprises, no upsells, just honest work from honest people. They've earned a customer for life."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">RK</div>
-          <div class="author-info"><strong>Robert Kim</strong><span>Hillsboro, OR</span></div>
-        </div>
       </div>
     </div>
   </section>
@@ -1190,9 +1175,9 @@ footer{
     </div>
     <div class="footer-col">
       <h4>Contact Info</h4>
-      <p>📍 Location</p>
-      <p>📞 Contact Number</a></p>
-      <p>✉️ Mail id</a></p>
+      <p>📍 1248 Verdant Avenue<br>Portland, OR 97201</p>
+      <p>📞 <a href="tel:+15551234567">(555) 123-4567</a></p>
+      <p>✉️ <a href="mailto:hello@greenscapepro.com">hello@greenscapepro.com</a></p>
     </div>
   </div>
   <div class="footer-bottom">
@@ -1203,31 +1188,11 @@ footer{
 <script>
 /* ============ ROUTING ============ */
 const pages = {
-  home:{
-    title:"GreenScape Pro — Premium Landscaping & Lawn Care Services",
-    desc:"GreenScape Pro offers professional landscaping, lawn care, garden design, hardscaping, and outdoor living solutions. Transform your outdoor space today.",
-    keywords:"landscaping, lawn care, garden design, hardscaping, landscape architecture, outdoor living"
-  },
-  about:{
-    title:"About Us — GreenScape Pro Landscaping | 18+ Years of Excellence",
-    desc:"Learn about GreenScape Pro's 18-year legacy of award-winning landscape design. Meet our certified team of horticulturists, designers, and craftspeople.",
-    keywords:"about landscaper, landscape company history, certified horticulturists, family owned landscaping"
-  },
-  services:{
-    title:"Landscape Services — Design, Lawn Care, Hardscaping & More | GreenScape Pro",
-    desc:"Complete landscaping services including landscape design, lawn care, hardscaping, garden installation, outdoor lighting, irrigation, tree care, and water features.",
-    keywords:"landscape design services, lawn maintenance, hardscaping contractor, irrigation installation, outdoor lighting"
-  },
-  "why-choose-us":{
-    title:"Why Choose GreenScape Pro | Award-Winning Landscapers",
-    desc:"Discover why hundreds of homeowners trust GreenScape Pro — certified experts, 5-year warranty, transparent pricing, eco-friendly practices, and 42 design awards.",
-    keywords:"best landscaper, why choose landscaper, award winning landscaping, licensed landscape contractor"
-  },
-  contact:{
-    title:"Contact GreenScape Pro | Free Landscape Consultation Portland OR",
-    desc:"Contact GreenScape Pro for a free landscape consultation. Call (555) 123-4567 or request a quote online. Serving Portland, OR and the Pacific Northwest.",
-    keywords:"landscaper near me, contact landscaper, free landscape quote, Portland landscaping company"
-  }
+  home:{title:"GreenScape Pro — Premium Landscaping & Lawn Care Services",desc:"GreenScape Pro offers professional landscaping, lawn care, garden design, hardscaping, and outdoor living solutions.",keywords:"landscaping, lawn care, garden design, hardscaping"},
+  about:{title:"About Us — GreenScape Pro Landscaping | 18+ Years of Excellence",desc:"Learn about GreenScape Pro's 18-year legacy of award-winning landscape design.",keywords:"about landscaper, landscape company history, certified horticulturists"},
+  services:{title:"Landscape Services — Design, Lawn Care, Hardscaping & More",desc:"Complete landscaping services including landscape design, lawn care, hardscaping, garden installation, and outdoor lighting.",keywords:"landscape design services, lawn maintenance, hardscaping contractor"},
+  "why-choose-us":{title:"Why Choose GreenScape Pro | Award-Winning Landscapers",desc:"Discover why hundreds of homeowners trust GreenScape Pro — certified experts, 5-year warranty, transparent pricing.",keywords:"best landscaper, why choose landscaper, award winning landscaping"},
+  contact:{title:"Contact GreenScape Pro | Free Landscape Consultation Portland OR",desc:"Contact GreenScape Pro for a free landscape consultation. Call (555) 123-4567 or request a quote online.",keywords:"landscaper near me, contact landscaper, free landscape quote"}
 };
 
 function navigate(page){
@@ -1245,7 +1210,6 @@ function navigate(page){
     document.getElementById('canonical').href='https://www.greenscapepro.com/'+(page==='home'?'':page);
   }
   window.scrollTo({top:0,behavior:'smooth'});
-  document.getElementById('navLinks').classList.remove('open');
 }
 
 document.querySelectorAll('[data-page]').forEach(link=>{
@@ -1262,7 +1226,6 @@ window.addEventListener('popstate',e=>{
   navigate(page);
 });
 
-/* Initial route */
 const initial=location.hash.replace('#','')||'home';
 navigate(pages[initial]?initial:'home');
 
@@ -1272,9 +1235,27 @@ window.addEventListener('scroll',()=>{
   nav.classList.toggle('scrolled',window.scrollY>60);
 });
 
-/* ============ HAMBURGER ============ */
-document.getElementById('hamburger').addEventListener('click',()=>{
-  document.getElementById('navLinks').classList.toggle('open');
+/* ============ HAMBURGER & MOBILE MENU ============ */
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+const navOverlay = document.getElementById('navOverlay');
+
+function toggleMenu() {
+  navLinks.classList.toggle('open');
+  navOverlay.classList.toggle('open');
+  hamburger.classList.toggle('open');
+  document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+}
+
+hamburger.addEventListener('click', toggleMenu);
+navOverlay.addEventListener('click', toggleMenu);
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (navLinks.classList.contains('open')) {
+      toggleMenu();
+    }
+  });
 });
 
 /* ============ COUNTER ANIMATION ============ */
